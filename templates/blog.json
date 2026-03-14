@@ -1,0 +1,76 @@
+{% comment %}
+  Blog Template - Article listing page
+{% endcomment %}
+
+<div class="blog-header">
+  <div class="container">
+    <h1 class="blog-title">{{ blog.title }}</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="article-grid">
+    {%- if blog.articles.size > 0 -%}
+      {%- for article in blog.articles -%}
+        <article class="article-card">
+          <a href="{{ article.url }}" class="article-image">
+            {%- if article.image != blank -%}
+              {{ article.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              <div style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); width: 100%; height: 100%;"></div>
+            {%- endif -%}
+          </a>
+          
+          <div class="article-content">
+            <div class="article-meta">
+              {%- if article.tags.size > 0 -%}
+                {{ article.tags.first }}
+              {%- endif -%}
+              <span style="margin: 0 0.5rem;">•</span>
+              {{ article.published_at | time_tag: format: 'month_day_year' }}
+            </div>
+            
+            <h2 class="article-title">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h2>
+            
+            {%- if article.excerpt != blank -%}
+              <p class="article-excerpt">{{ article.excerpt }}</p>
+            {%- endif -%}
+            
+            <a href="{{ article.url }}" class="btn btn-ghost">Read More</a>
+          </div>
+        </article>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="text-center" style="grid-column: span 3; padding: 4rem;">
+        <p style="font-size: 1.25rem; color: var(--color-text-secondary);">
+          No articles found.
+        </p>
+        <a href="/blogs/news" class="btn btn-primary" style="margin-top: 1rem;">
+          Check Back Later
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if paginate.pages > 1 -%}
+    <div class="pagination" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 4rem;">
+      {%- if paginate.previous -%}
+        <a href="{{ paginate.previous.url }}" class="btn btn-ghost">Previous</a>
+      {%- endif -%}
+
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+          <a href="{{ part.url }}" class="btn btn-ghost">{{ part.title }}</a>
+        {%- else -%}
+          <span class="btn btn-ghost active">{{ part.title }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if paginate.next -%}
+        <a href="{{ paginate.next.url }}" class="btn btn-ghost">Next</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

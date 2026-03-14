@@ -1,0 +1,64 @@
+{% comment %}
+  Collection Template - Product listing page
+{% endcomment %}
+
+<div class="collection-header">
+  <div class="container">
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p class="collection-description">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<div class="container">
+  <div class="collection-filters">
+    <span class="filter-count">
+      {{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}
+    </span>
+    
+    <div class="filter-options">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="newest">Newest</button>
+      <button class="filter-btn" data-filter="price-low">Price: Low</button>
+      <button class="filter-btn" data-filter="price-high">Price: High</button>
+    </div>
+  </div>
+
+  <div class="product-grid">
+    {%- if collection.products.size > 0 -%}
+      {%- for product in collection.products -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      <div class="text-center" style="grid-column: span 4; padding: 4rem;">
+        <p style="font-size: 1.25rem; color: var(--color-text-secondary);">
+          No products found in this collection.
+        </p>
+        <a href="/collections/all" class="btn btn-primary" style="margin-top: 1rem;">
+          View All Products
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if paginate.pages > 1 -%}
+    <div class="pagination" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 4rem;">
+      {%- if paginate.previous -%}
+        <a href="{{ paginate.previous.url }}" class="btn btn-ghost">Previous</a>
+      {%- endif -%}
+
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+          <a href="{{ part.url }}" class="btn btn-ghost">{{ part.title }}</a>
+        {%- else -%}
+          <span class="btn btn-ghost active">{{ part.title }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if paginate.next -%}
+        <a href="{{ paginate.next.url }}" class="btn btn-ghost">Next</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

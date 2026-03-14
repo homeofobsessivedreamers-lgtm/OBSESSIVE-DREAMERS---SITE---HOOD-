@@ -1,0 +1,31 @@
+{% comment %}
+  Collection List Template - Shows all collections
+{% endcomment %}
+
+<div class="blog-header">
+  <div class="container">
+    <h1 class="blog-title">Collections</h1>
+  </div>
+</div>
+
+<div class="container" style="padding: 4rem 0;">
+  <div class="product-grid">
+    {%- for collection in collections -%}
+      {%- unless collection.products_count == 0 -%}
+        <a href="{{ collection.url }}" class="product-card" style="text-decoration: none;">
+          <div class="product-card-image">
+            {%- if collection.featured_image != blank -%}
+              {{ collection.featured_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              <div style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); width: 100%; height: 100%;"></div>
+            {%- endif -%}
+          </div>
+          <div class="product-card-content">
+            <h3 class="product-card-title" style="font-family: var(--font-heading);">{{ collection.title }}</h3>
+            <p class="product-card-price">{{ collection.products_count }} products</p>
+          </div>
+        </a>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</div>

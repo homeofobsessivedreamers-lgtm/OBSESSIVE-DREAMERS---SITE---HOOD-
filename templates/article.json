@@ -1,0 +1,95 @@
+{% comment %}
+  Article Template - Single article page
+{% endcomment %}
+
+<article class="article-template">
+  <div class="container">
+    <header class="article-header">
+      <div class="article-meta">
+        {%- if article.tags.size > 0 -%}
+          {%- for tag in article.tags -%}
+            <span>{{ tag }}</span>
+            {%- unless forloop.last -%}<span style="margin: 0 0.5rem;">•</span>{%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      
+      <h1 class="article-detail-title">{{ article.title }}</h1>
+      
+      <div class="article-meta" style="margin-top: 1rem;">
+        {{ article.published_at | time_tag: format: 'month_day_year' }}
+        {%- if article.author != blank -%}
+          <span style="margin: 0 0.5rem;">•</span>
+          By {{ article.author }}
+        {%- endif -%}
+      </div>
+    </header>
+
+    {%- if article.image != blank -%}
+      <div class="article-featured-image">
+        {{ article.image | image_url: width: 1600 | image_tag: loading: 'eager' }}
+      </div>
+    {%- endif -%}
+
+    <div class="article-body">
+      {{ article.content }}
+    </div>
+
+    {%- if article.tags.size > 0 -%}
+      <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+        <span style="color: var(--color-text-secondary);">Tags:</span>
+        {%- for tag in article.tags -%}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="btn btn-ghost" style="margin-left: 0.5rem;">
+            {{ tag }}
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if blog.comments_enabled? -%}
+      <div class="article-comments" style="margin-top: 4rem;">
+        <h3 style="margin-bottom: 2rem;">
+          Comments ({{ article.comments_count }})
+        </h3>
+
+        {%- form 'new_comment', article -%}
+          <div style="display: grid; gap: 1rem; max-width: 600px;">
+            <div>
+              <label for="comment-author" style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem;">Name</label>
+              <input type="text" id="comment-author" name="comment[author]" required
+                     style="width: 100%; padding: 1rem; background: var(--color-secondary); border: 1px solid var(--color-border); color: var(--color-text);">
+            </div>
+            
+            <div>
+              <label for="comment-email" style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem;">Email</label>
+              <input type="email" id="comment-email" name="comment[email]" required
+                     style="width: 100%; padding: 1rem; background: var(--color-secondary); border: 1px solid var(--color-border); color: var(--color-text);">
+            </div>
+            
+            <div>
+              <label for="comment-body" style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem;">Comment</label>
+              <textarea id="comment-body" name="comment[body]" required rows="5"
+                        style="width: 100%; padding: 1rem; background: var(--color-secondary); border: 1px solid var(--color-border); color: var(--color-text); resize: vertical;"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Post Comment</button>
+          </div>
+        {%- endform -%}
+
+        {%- if article.comments.size > 0 -%}
+          <div style="margin-top: 3rem;">
+            {%- for comment in article.comments -%}
+              <div style="padding: 1.5rem 0; border-bottom: 1px solid var(--color-border);">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">{{ comment.author }}</div>
+                <div style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                  {{ comment.created_at | time_tag: format: 'month_day_year' }}
+                </div>
+                <div>{{ comment.content }}</div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>

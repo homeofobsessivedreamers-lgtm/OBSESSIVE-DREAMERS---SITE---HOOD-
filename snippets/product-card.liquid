@@ -1,0 +1,49 @@
+{% comment %}
+  Product Card Snippet - Reusable product card component
+{% endcomment %}
+
+<div class="product-card" data-vendor="{{ product.vendor | downcase | default: 'default' }}">
+  <a href="{{ product.url }}" class="product-card-image">
+    {%- if product.featured_media != blank -%}
+      {{ product.featured_media | image_url: width: 600 | image_tag: 
+        loading: 'lazy',
+        class: 'product-card-img'
+      }}
+    {%- else -%}
+      <div style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); width: 100%; height: 100%;"></div>
+    {%- endif -%}
+
+    {%- if product.available == false -%}
+      <span class="product-card-badge" style="position: absolute; top: 1rem; left: 1rem; background: #000; color: #fff; padding: 0.25rem 0.75rem; font-size: 0.625rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Sold Out</span>
+    {%- elsif product.compare_at_price > product.price -%}
+      <span class="product-card-badge" style="position: absolute; top: 1rem; left: 1rem; background: var(--color-accent); color: #000; padding: 0.25rem 0.75rem; font-size: 0.625rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Sale</span>
+    {%- endif -%}
+
+    <div class="product-card-quick-add">
+      {%- form 'product', product -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="btn btn-primary" style="padding: 0.75rem 1rem; font-size: 0.75rem;">
+          Quick Add
+        </button>
+      {%- endform -%}
+    </div>
+  </a>
+
+  <div class="product-card-content">
+    {%- if product.vendor != blank -%}
+      <div class="product-card-vendor">{{ product.vendor }}</div>
+    {%- endif -%}
+
+    <a href="{{ product.url }}" class="product-card-title">
+      {{ product.title }}
+    </a>
+
+    <div class="product-card-price">
+      {%- if product.compare_at_price > product.price -%}
+        <span class="compare-at">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+      {{ product.price | money }}
+    </div>
+  </div>
+</div>

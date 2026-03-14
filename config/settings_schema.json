@@ -1,0 +1,226 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Home of Obsessive Dreamers",
+    "theme_version": "1.0.0",
+    "theme_author": "HOD Team",
+    "theme_description": "Premium multimedia platform theme for music, news, fashion, arts, sports, and store",
+    "settings": []
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "default": "#0A0A0A",
+        "label": "Primary Background"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "default": "#1A1A1A",
+        "label": "Secondary Background"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "default": "#C9A962",
+        "label": "Accent Gold"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "default": "#FFFFFF",
+        "label": "Primary Text"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "default": "#A0A0A0",
+        "label": "Secondary Text"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font Settings"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "default": "playfair_display",
+        "label": "Heading Font"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "default": "dm_sans",
+        "label": "Body Font"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "min": 1,
+        "max": 2,
+        "step": 0.1,
+        "default": 1,
+        "label": "Heading Scale"
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header Settings"
+      },
+      {
+        "type": "text",
+        "id": "header_logo_text",
+        "default": "HOME OF OBSESSIVE DREAMERS",
+        "label": "Logo Text"
+      },
+      {
+        "type": "link_list",
+        "id": "header_menu",
+        "default": "main-menu",
+        "label": "Menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_search",
+        "default": true,
+        "label": "Enable Search"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Footer Settings"
+      },
+      {
+        "type": "text",
+        "id": "footer_newsletter_title",
+        "default": "Join the Movement",
+        "label": "Newsletter Title"
+      },
+      {
+        "type": "text",
+        "id": "footer_newsletter_text",
+        "default": "Subscribe for exclusive updates",
+        "label": "Newsletter Text"
+      },
+      {
+        "type": "text",
+        "id": "footer_copyright",
+        "default": "© 2024 Home of Obsessive Dreamers. All rights reserved.",
+        "label": "Copyright Text"
+      }
+    ]
+  },
+  {
+    "name": "Homepage",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero Section"
+      },
+      {
+        "type": "text",
+        "id": "hero_title",
+        "default": "WHERE DREAMS BECOME LEGACIES",
+        "label": "Hero Title"
+      },
+      {
+        "type": "text",
+        "id": "hero_subtitle",
+        "default": "The premier destination for music, culture, and inspiration",
+        "label": "Hero Subtitle"
+      },
+      {
+        "type": "text",
+        "id": "hero_button_text",
+        "default": "EXPLORE",
+        "label": "Hero Button Text"
+      },
+      {
+        "type": "url",
+        "id": "hero_button_link",
+        "default": "/collections/all",
+        "label": "Hero Button Link"
+      }
+    ]
+  },
+  {
+    "name": "Product Grid",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product Grid"
+      },
+      {
+        "type": "range",
+        "id": "products_per_row",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "default": 4,
+        "label": "Products per Row"
+      },
+      {
+        "type": "range",
+        "id": "products_per_page",
+        "min": 4,
+        "max": 24,
+        "step": 4,
+        "default": 12,
+        "label": "Products per Page"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "default": "",
+        "label": "Twitter/X URL"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "default": "",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "default": "",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "default": "",
+        "label": "TikTok URL"
+      }
+    ]
+  }
+]

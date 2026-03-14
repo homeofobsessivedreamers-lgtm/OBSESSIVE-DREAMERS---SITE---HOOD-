@@ -1,0 +1,132 @@
+{% comment %}
+  Hero Section - Cinematic hero with video/image background
+{% endcomment %}
+
+<section class="hero">
+  <div class="hero-background">
+    {%- if section.settings.video != blank -%}
+      <video class="hero-video" autoplay muted loop playsinline poster="{{ section.settings.image | image_url: width: 1920 }}">
+        <source src="{{ section.settings.video }}" type="video/mp4">
+      </video>
+    {%- elsif section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 1920 | image_tag: class: 'hero-image', loading: 'eager' }}
+    {%- else -%}
+      <div style="background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #2a2a2a 100%); width: 100%; height: 100%;"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="hero-content">
+    {%- if section.settings.badge_text != blank -%}
+      <span class="hero-badge">{{ section.settings.badge_text }}</span>
+    {%- endif -%}
+
+    <h1 class="hero-title animate-slideUp">
+      {{ section.settings.title | default: settings.hero_title }}
+    </h1>
+
+    <p class="hero-subtitle animate-slideUp stagger-1">
+      {{ section.settings.subtitle | default: settings.hero_subtitle }}
+    </p>
+
+    <div class="hero-buttons animate-slideUp stagger-2">
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_link | default: settings.hero_button_link }}" class="btn btn-primary">
+          {{ section.settings.button_text | default: settings.hero_button_text }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.secondary_button_text != blank -%}
+        <a href="{{ section.settings.secondary_button_link }}" class="btn btn-secondary">
+          {{ section.settings.secondary_button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_scroll -%}
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "video",
+      "label": "Background Video URL",
+      "info": "Enter the URL of a video file (mp4)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "WELCOME TO THE FUTURE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "WHERE DREAMS BECOME LEGACIES"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "The premier destination for music, culture, fashion, arts, and sports"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Primary Button Text",
+      "default": "EXPLORE"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll",
+      "label": "Show Scroll Indicator",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

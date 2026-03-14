@@ -1,0 +1,52 @@
+{
+  "current": {
+    "color_primary": "#0A0A0A",
+    "color_secondary": "#1A1A1A",
+    "color_accent": "#C9A962",
+    "color_text": "#FFFFFF",
+    "color_text_secondary": "#A0A0A0",
+    "font_heading": "playfair_display",
+    "font_body": "dm_sans",
+    "heading_scale": 1,
+    "header_logo_text": "HOME OF OBSESSIVE DREAMERS",
+    "header_menu": "main-menu",
+    "enable_search": true,
+    "footer_newsletter_title": "Join the Movement",
+    "footer_newsletter_text": "Subscribe for exclusive updates and early access to new releases.",
+    "footer_copyright": "© 2024 Home of Obsessive Dreamers. All rights reserved.",
+    "hero_title": "WHERE DREAMS BECOME LEGACIES",
+    "hero_subtitle": "The premier destination for music, culture, fashion, arts, and sports",
+    "hero_button_text": "EXPLORE",
+    "hero_button_link": "/collections/all",
+    "products_per_row": 4,
+    "products_per_page": 12,
+    "social_twitter_link": "",
+    "social_instagram_link": "",
+    "social_youtube_link": "",
+    "social_tiktok_link": ""
+  },
+  "presets": {
+    "default": {
+      "color_primary": "#0A0A0A",
+      "color_secondary": "#1A1A1A",
+      "color_accent": "#C9A962",
+      "color_text": "#FFFFFF",
+      "color_text_secondary": "#A0A0A0",
+      "font_heading": "playfair_display",
+      "font_body": "dm_sans",
+      "heading_scale": 1,
+      "header_logo_text": "HOME OF OBSESSIVE DREAMERS",
+      "header_menu": "main-menu",
+      "enable_search": true,
+      "footer_newsletter_title": "Join the Movement",
+      "footer_newsletter_text": "Subscribe for exclusive updates and early access to new releases.",
+      "footer_copyright": "© 2024 Home of Obsessive Dreamers. All rights reserved.",
+      "hero_title": "WHERE DREAMS BECOME LEGACIES",
+      "hero_subtitle": "The premier destination for music, culture, fashion, arts, and sports",
+      "hero_button_text": "EXPLORE",
+      "hero_button_link": "/collections/all",
+      "products_per_row": 4,
+      "products_per_page": 12
+    }
+  }
+}

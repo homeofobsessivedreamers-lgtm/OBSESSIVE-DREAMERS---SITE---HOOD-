@@ -1,0 +1,83 @@
+{% comment %}
+  Featured Content Section - Editorial style content blocks
+{% endcomment %}
+
+<section class="section featured-section">
+  <div class="container">
+    <div class="featured-content">
+      <div class="featured-image">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+        {%- else -%}
+          <div style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); width: 100%; height: 100%;"></div>
+        {%- endif -%}
+      </div>
+
+      <div class="featured-info">
+        {%- if section.settings.label != blank -%}
+          <span class="featured-label">{{ section.settings.label }}</span>
+        {%- endif -%}
+
+        <h2 class="featured-title">{{ section.settings.title }}</h2>
+
+        <div class="featured-description">
+          {{ section.settings.description }}
+        </div>
+
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link }}" class="btn btn-primary">
+            {{ section.settings.button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Content",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "FEATURED"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Discover Our Story"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Home of Obsessive Dreamers is more than a platform—it's a movement. We bring together the hottest music, the latest news, cutting-edge fashion, incredible arts, and unstoppable sports content.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Content"
+    }
+  ]
+}
+{% endschema %}

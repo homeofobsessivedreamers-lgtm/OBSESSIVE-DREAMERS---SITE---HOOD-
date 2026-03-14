@@ -1,0 +1,65 @@
+{% comment %}
+  Index Template - Homepage
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Homepage",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "badge_text": "WELCOME TO THE FUTURE",
+        "title": "WHERE DREAMS BECOME LEGACIES",
+        "subtitle": "The premier destination for music, culture, fashion, arts, and sports. Join the movement that's reshaping entertainment.",
+        "button_text": "EXPLORE",
+        "button_link": "/collections/all",
+        "show_scroll": true
+      }
+    },
+    "featured_content": {
+      "type": "featured-content",
+      "settings": {
+        "label": "OUR STORY",
+        "title": "Welcome to HOD",
+        "description": "<p>Home of Obsessive Dreamers is more than a platform—it's a movement. We bring together the hottest music, the latest news, cutting-edge fashion, incredible arts, and unstoppable sports content.</p><p>Every story we tell, every product we curate, every moment we capture is designed to inspire and empower the next generation of dreamers.</p>",
+        "button_text": "LEARN MORE",
+        "button_link": "/pages/about"
+      }
+    },
+    "product_grid": {
+      "type": "product-grid",
+      "settings": {
+        "title": "Featured Products",
+        "subtitle": "Exclusive merchandise and curated collections",
+        "products_count": 8
+      }
+    },
+    "editorial_grid": {
+      "type": "editorial-grid",
+      "settings": {
+        "title": "Latest Stories",
+        "subtitle": "News, interviews, and exclusive content",
+        "category_1": "MUSIC",
+        "title_1": "The Future of Hip-Hop: Emerging Artists to Watch",
+        "category_2": "FASHION",
+        "title_2": "Streetwear Trends Taking Over 2024",
+        "category_3": "SPORTS",
+        "title_3": "Breaking Records: Championship Recap"
+      }
+    },
+    "newsletter": {
+      "type": "featured-content",
+      "settings": {
+        "label": "NEWSLETTER",
+        "title": "Stay Connected",
+        "description": "<p>Get exclusive updates, early access to drops, and behind-the-scenes content delivered to your inbox.</p>",
+        "button_text": "SUBSCRIBE",
+        "button_link": "#newsletter"
+      }
+    }
+  }
+}
+{% endschema %}
+
+{{ content_for_layout }}

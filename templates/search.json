@@ -1,0 +1,88 @@
+{% comment %}
+  Search Template - Search results page
+{% endcomment %}
+
+<div class="blog-header">
+  <div class="container">
+    <h1 class="blog-title">
+      {%- if search.performed -%}
+        Search Results
+      {%- else -%}
+        Search
+      {%- endif -%}
+    </h1>
+  </div>
+</div>
+
+<div class="container" style="padding: 4rem 0;">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-form-page" style="max-width: 600px; margin: 0 auto 4rem;">
+    <div style="display: flex; gap: 1rem;">
+      <input type="search" 
+             name="q" 
+             class="newsletter-input" 
+             placeholder="Search for products, articles, and more..."
+             value="{{ search.terms }}"
+             style="flex: 1;">
+      <input type="hidden" name="type" value="product,article">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results_count == 0 -%}
+      <div class="text-center">
+        <p style="font-size: 1.25rem; color: var(--color-text-secondary);">
+          No results found for "{{ search.terms }}"
+        </p>
+        <p style="color: var(--color-text-secondary); margin-top: 1rem;">
+          Try different keywords or browse our collections.
+        </p>
+      </div>
+    {%- else -%}
+      <p style="text-align: center; color: var(--color-text-secondary); margin-bottom: 2rem;">
+        {{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }} for "{{ search.terms }}"
+      </p>
+
+      {%- assign products = search.results | where: "object_type", "product" -%}
+      {%- assign articles = search.results | where: "object_type", "article" -%}
+
+      {%- if products.size > 0 -%}
+        <div class="section-header">
+          <h2 class="section-title">Products</h2>
+        </div>
+        <div class="product-grid mb-xl">
+          {%- for product in products -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if articles.size > 0 -%}
+        <div class="section-header">
+          <h2 class="section-title">Articles</h2>
+        </div>
+        <div class="article-grid">
+          {%- for article in articles -%}
+            <article class="article-card">
+              <a href="{{ article.url }}" class="article-image">
+                {%- if article.image != blank -%}
+                  {{ article.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                {%- else -%}
+                  <div style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); width: 100%; height: 100%;"></div>
+                {%- endif -%}
+              </a>
+              <div class="article-content">
+                <h2 class="article-title">
+                  <a href="{{ article.url }}">{{ article.title }}</a>
+                </h2>
+                {%- if article.excerpt != blank -%}
+                  <p class="article-excerpt">{{ article.excerpt }}</p>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+</div>

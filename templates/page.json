@@ -1,0 +1,15 @@
+{% comment %}
+  Page Template - Generic page
+{% endcomment %}
+
+<div class="page-template" style="padding: calc(var(--header-height) + var(--spacing-lg)) 0 var(--spacing-xl);">
+  <div class="container" style="max-width: 800px;">
+    <header class="article-header">
+      <h1 class="article-detail-title">{{ page.title }}</h1>
+    </header>
+
+    <div class="article-body">
+      {{ page.content }}
+    </div>
+  </div>
+</div>

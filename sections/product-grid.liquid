@@ -1,0 +1,155 @@
+{% comment %}
+  Product Grid Section - Display products in a grid layout
+{% endcomment %}
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.title != blank -%}
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      <div class="section-divider"></div>
+    </div>
+
+    {%- if section.settings.collection != blank -%}
+      {%- assign products = section.settings.collection.products -%}
+    {%- else -%}
+      {%- assign products = collections['frontpage'].products -%}
+    {%- endif -%}
+
+    {%- if section.settings.category_menu != blank -%}
+      <nav class="category-nav">
+        <a href="#" class="category-link active" data-filter="all">All</a>
+        {%- for link in section.settings.category_menu.links -%}
+          <a href="{{ link.url }}" class="category-link" data-filter="{{ link.title | downcase }}">{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    <div class="product-grid" id="product-grid">
+      {%- if products.size > 0 -%}
+        {%- for product in products limit: section.settings.products_count -%}
+          <div class="product-card" data-vendor="{{ product.vendor | downcase }}">
+            <a href="{{ product.url }}" class="product-card-image">
+              {%- if product.featured_media != blank -%}
+                {{ product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy' }}
+              {%- else -%}
+                <div style="background: #2a2a2a; width: 100%; height: 100%;"></div>
+              {%- endif -%}
+
+              {%- if product.available == false -%}
+                <span class="product-card-badge">Sold Out</span>
+              {%- elsif product.compare_at_price > product.price -%}
+                <span class="product-card-badge">Sale</span>
+              {%- endif -%}
+
+              <div class="product-card-quick-add">
+                {%- form 'product', product -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" class="btn btn-primary btn-quick-add">
+                    Quick Add
+                  </button>
+                {%- endform -%}
+              </div>
+            </a>
+
+            <div class="product-card-content">
+              {%- if product.vendor != blank -%}
+                <div class="product-card-vendor">{{ product.vendor }}</div>
+              {%- endif -%}
+
+              <a href="{{ product.url }}" class="product-card-title">
+                {{ product.title }}
+              </a>
+
+              <div class="product-card-price">
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="compare-at">{{ product.compare_at_price | money }}</span>
+                {%- endif -%}
+                {{ product.price | money }}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..section.settings.products_count) -%}
+          <div class="product-card">
+            <div class="product-card-image">
+              <div style="background: #2a2a2a; width: 100%; height: 100%;"></div>
+            </div>
+            <div class="product-card-content">
+              <div class="product-card-vendor">Brand</div>
+              <div class="product-card-title">Sample Product {{ i }}</div>
+              <div class="product-card-price">$99.00</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all and section.settings.collection != blank -%}
+      <div class="text-center mt-lg">
+        <a href="{{ section.settings.collection.url }}" class="btn btn-secondary">
+          View All Products
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Explore our latest collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "link_list",
+      "id": "category_menu",
+      "label": "Category Filter Menu"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "default": 8,
+      "label": "Number of Products"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show View All Button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Grid"
+    }
+  ]
+}
+{% endschema %}

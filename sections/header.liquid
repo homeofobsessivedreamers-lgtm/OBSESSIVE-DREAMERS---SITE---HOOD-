@@ -1,0 +1,134 @@
+{% comment %}
+  Header Section - Main navigation for the theme
+{% endcomment %}
+
+{%- style -%}
+  .header {
+    --header-height: {{ section.settings.header_height | default: 80 }}px;
+  }
+{%- endstyle -%}
+
+<header class="header">
+  <div class="header-inner">
+    <a href="{{ routes.root_url }}" class="header-logo">
+      {{ section.settings.logo_text | default: settings.header_logo_text }}
+    </a>
+
+    <nav class="header-nav" role="navigation">
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="header-nav-link">
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="/collections/all" class="header-nav-link">Shop</a>
+        <a href="/blogs/news" class="header-nav-link">News</a>
+        <a href="/pages/music" class="header-nav-link">Music</a>
+        <a href="/pages/fashion" class="header-nav-link">Fashion</a>
+        <a href="/pages/arts" class="header-nav-link">Arts</a>
+        <a href="/pages/sports" class="header-nav-link">Sports</a>
+      {%- endif -%}
+    </nav>
+
+    <div class="header-actions">
+      {%- if section.settings.enable_search -%}
+        <button class="header-icon search-toggle" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="header-icon cart-toggle" aria-label="Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="cart-count">0</span>
+      </a>
+
+      <button class="header-menu-toggle" aria-label="Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  {%- if section.settings.menu != blank -%}
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}" class="mobile-nav-link">{{ link.title }}</a>
+    {%- endfor -%}
+  {%- else -%}
+    <a href="/collections/all" class="mobile-nav-link">Shop</a>
+    <a href="/blogs/news" class="mobile-nav-link">News</a>
+    <a href="/pages/music" class="mobile-nav-link">Music</a>
+    <a href="/pages/fashion" class="mobile-nav-link">Fashion</a>
+    <a href="/pages/arts" class="mobile-nav-link">Arts</a>
+    <a href="/pages/sports" class="mobile-nav-link">Sports</a>
+  {%- endif -%}
+</div>
+
+{%- if section.settings.enable_search -%}
+  <div class="search-modal">
+    <button class="search-close" aria-label="Close search">&times;</button>
+    <div class="search-container">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+        <input type="search" 
+               name="q" 
+               class="search-input" 
+               placeholder="Search for products, articles, and more..."
+               autocomplete="off">
+        <input type="hidden" name="type" value="product,article">
+      </form>
+      <div class="search-results"></div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "HOME OF OBSESSIVE DREAMERS"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_search",
+      "label": "Enable Search",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "header_height",
+      "min": 60,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "label": "Header Height"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}
